@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=3 uid="uid://dai3vttb13kha"]
+
+[ext_resource type="Texture2D" uid="uid://cgrvngd148r8" path="res://Cobblestone_29_JE5_BE3.png" id="1_ajggp"]
+[ext_resource type="PackedScene" uid="uid://bpvod6eqvpl4c" path="res://tiktak.tscn" id="2_yge7m"]
+[ext_resource type="Texture2D" uid="uid://duarljygqi86m" path="res://crosshair.png" id="3_3aech"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0ofl"]
+albedo_texture = ExtResource("1_ajggp")
+emission_enabled = true
+uv1_scale = Vector3(60, 60, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bknbs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mewoc"]
+margin = 0.0
+size = Vector3(27.842, 0.149, 35.585)
+
+[node name="level 1" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.325417, 1.68102, 1.58943)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(27.8417, 0, 0, 0, 0.149, 0, 0, 0, 35.5851, 0.199429, -1.75876, -1.68721)
+material_override = SubResource("StandardMaterial3D_a0ofl")
+lod_bias = 0.001
+mesh = SubResource("BoxMesh_bknbs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199, -1.759, -1.687)
+shape = SubResource("BoxShape3D_mewoc")
+
+[node name="tiktak" parent="." instance=ExtResource("2_yge7m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.852025, 0.995707, -0.329928)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0174, 0.999849, 0, -0.999849, -0.0174, 0, 3.55243, 0)
+light_energy = 16.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.39999, 0.39999)
+texture = ExtResource("3_3aech")

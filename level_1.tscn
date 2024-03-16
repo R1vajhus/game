@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://dai3vttb13kha"]
+
+[ext_resource type="Script" path="res://level_1.gd" id="1_1tsbk"]
+[ext_resource type="Texture2D" uid="uid://cgrvngd148r8" path="res://Cobblestone_29_JE5_BE3.png" id="1_ajggp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0ofl"]
+albedo_texture = ExtResource("1_ajggp")
+emission_enabled = true
+uv1_scale = Vector3(60, 60, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bknbs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mewoc"]
+margin = 0.0
+size = Vector3(27.842, 0.149, 35.585)
+
+[sub_resource type="Theme" id="Theme_1vsgx"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_1tsbk")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.325417, 1.68102, 1.58943)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(27.8417, 0, 0, 0, 0.149, 0, 0, 0, 35.5851, 0.199429, -1.75876, -1.68721)
+material_override = SubResource("StandardMaterial3D_a0ofl")
+lod_bias = 0.001
+mesh = SubResource("BoxMesh_bknbs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199, -1.759, -1.687)
+shape = SubResource("BoxShape3D_mewoc")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0174, 0.999849, 0, -0.999849, -0.0174, 0, 3.55243, 0)
+light_energy = 16.0
+
+[node name="MENU" type="CanvasLayer" parent="."]
+
+[node name="MENU" type="Control" parent="MENU"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MENU/MENU"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.5
+offset_top = -64.0
+offset_right = 71.5
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_1vsgx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MENU/MENU/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MENU/MENU/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Меню"
+horizontal_alignment = 1
+
+[node name="HOST_BUTTON" type="Button" parent="MENU/MENU/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Хост"
+
+[node name="JOIN_BUTTON" type="Button" parent="MENU/MENU/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Присоедениться"
+
+[node name="AddressEntry" type="LineEdit" parent="MENU/MENU/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Адрес сервера"
+alignment = 1
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="MENU/MENU/MarginContainer/VBoxContainer/HOST_BUTTON" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="MENU/MENU/MarginContainer/VBoxContainer/JOIN_BUTTON" to="." method="_on_join_button_pressed"]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dai3vttb13kha"]
+
+[ext_resource type="Texture2D" uid="uid://cgrvngd148r8" path="res://Cobblestone_29_JE5_BE3.png" id="1_ajggp"]
+[ext_resource type="PackedScene" uid="uid://bpvod6eqvpl4c" path="res://tiktak.tscn" id="2_yge7m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a0ofl"]
+albedo_texture = ExtResource("1_ajggp")
+emission_enabled = true
+uv1_scale = Vector3(60, 60, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bknbs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mewoc"]
+margin = 0.0
+size = Vector3(27.842, 0.149, 35.585)
+
+[node name="level 1" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.325417, 1.68102, 1.58943)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(27.8417, 0, 0, 0, 0.149, 0, 0, 0, 35.5851, 0.199429, -1.75876, -1.68721)
+material_override = SubResource("StandardMaterial3D_a0ofl")
+lod_bias = 0.001
+mesh = SubResource("BoxMesh_bknbs")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199, -1.759, -1.687)
+shape = SubResource("BoxShape3D_mewoc")
+
+[node name="tiktak" parent="." instance=ExtResource("2_yge7m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.852025, 0.995707, -0.329928)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0174, 0.999849, 0, -0.999849, -0.0174, 0, 3.55243, 0)
+light_energy = 16.0
